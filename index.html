@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آلة حاسبة احترافية</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    
+    <!-- Math.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.2/math.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="1">
+
+    <div class="container">
+        <div class="calculator">
+            <!-- Display Area -->
+            <div class="display-area">
+                <div class="history" id="history"></div>
+                <div id="result">0</div>
+            </div>
+
+            <!-- Buttons Grid -->
+            <div class="buttons">
+                <button class="function" onclick="insert('sin(')">sin</button>
+                <button class="function" onclick="insert('cos(')">cos</button>
+                <button class="function" onclick="insert('tan(')">tan</button>
+                <button class="special" onclick="insert('sqrt(')">√</button>
+                
+                <button class="special" onclick="insert('log10(')">log</button>
+                <button class="operator" onclick="insert('^')">xʸ</button>
+                <button class="function" onclick="insert('!')">x!</button>
+                <button class="function" onclick="insert('π')">π</button>
+                
+                <button class="special" onclick="clearAll()">AC</button>
+                <button class="special" onclick="backspace()">DEL</button>
+                <button class="digit" onclick="insert('(')">)</button>
+                <button class="digit" onclick="insert(')')">(</button>
+                
+                <button class="digit" onclick="insert('7')">7</button>
+                <button class="digit" onclick="insert('8')">8</button>
+                <button class="digit" onclick="insert('9')">9</button>
+                <button class="operator" onclick="insert('/')">÷</button>
+                
+                <button class="digit" onclick="insert('4')">4</button>
+                <button class="digit" onclick="insert('5')">5</button>
+                <button class="digit" onclick="insert('6')">6</button>
+                <button class="operator" onclick="insert('*')">×</button>
+                
+                <button class="digit" onclick="insert('1')">1</button>
+                <button class="digit" onclick="insert('2')">2</button>
+                <button class="digit" onclick="insert('3')">3</button>
+                <button class="operator" onclick="insert('-')">-</button>
+                
+                <button class="equal" onclick="calculate()">=</button>
+                <button class="digit" onclick="insert('.')">.</button>
+                <button class="digit" onclick="insert('0')">0</button>
+                <button class="operator" onclick="insert('+')">+</button>
+            </div>
+        </div>
+
+        <!-- Footer with Social Links -->
+        <footer class="footer">
+            <a href="https://wa.me/01208504295" target="_blank" class="circle whatsapp" aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+            <a href="https://instagram.com" target="_blank" class="circle instagram" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="https://facebook.com" target="_blank" class="circle facebook" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+        </footer>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
