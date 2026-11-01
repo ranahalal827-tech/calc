@@ -1,0 +1,437 @@
+/* ===================================
+   Global Styles & Reset
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: background 0.5s ease;
+}
+
+/* ===================================
+   Theme Variations
+   =================================== */
+body[data-theme="1"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+body[data-theme="2"] {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+body[data-theme="3"] {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+body[data-theme="4"] {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* ===================================
+   Container
+   =================================== */
+.container {
+    width: 100%;
+    max-width: 340px;
+    padding: 0 10px;
+}
+
+/* ===================================
+   Calculator Main Structure
+   =================================== */
+.calculator {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35), 
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    animation: fadeIn 0.5s ease;
+}
+
+/* ===================================
+   Display Area
+   =================================== */
+.display-area {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 16px 18px;
+    text-align: right;
+    font-size: 1.8rem;
+    min-height: 80px;
+    direction: ltr;
+    color: white;
+    word-break: break-all;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+}
+
+.display-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 100%);
+    pointer-events: none;
+}
+
+body[data-theme="2"] .display-area {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+body[data-theme="3"] .display-area {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+body[data-theme="4"] .display-area {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.history {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 6px;
+    text-align: right;
+    min-height: 20px;
+    font-weight: 400;
+}
+
+#result {
+    font-weight: 700;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.5px;
+}
+
+/* ===================================
+   Buttons Grid
+   =================================== */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.98);
+}
+
+/* ===================================
+   Button Base Styles
+   =================================== */
+button {
+    padding: 15px 10px;
+    font-size: 1.05rem;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12),
+                0 2px 4px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2),
+                0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ===================================
+   Button Types
+   =================================== */
+.digit { 
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8ebf7 100%);
+    color: #4a5568;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.digit:hover {
+    background: linear-gradient(135deg, #ffffff 0%, #e0e4f2 100%);
+}
+
+.operator { 
+    background: linear-gradient(135deg, #7c8ff5 0%, #8b5fc7 100%);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.operator:hover {
+    background: linear-gradient(135deg, #6b7ee4 0%, #7a4eb6 100%);
+}
+
+.function { 
+    background: linear-gradient(135deg, #9b7ff7 0%, #a66dca 100%);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.function:hover {
+    background: linear-gradient(135deg, #8a6ee6 0%, #955cb9 100%);
+}
+
+.special { 
+    background: linear-gradient(135deg, #b88ff9 0%, #c47dd4 100%);
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.special:hover {
+    background: linear-gradient(135deg, #a77ee8 0%, #b36cc3 100%);
+}
+
+.equal { 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.equal:hover {
+    background: linear-gradient(135deg, #556dd9 0%, #653a91 100%);
+}
+
+/* ===================================
+   Footer & Social Links
+   =================================== */
+.footer {
+    width: 100%;
+    max-width: 340px;
+    padding: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.18),
+                0 -2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    animation: fadeIn 0.5s ease;
+}
+
+.circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    color: white;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25),
+                0 2px 6px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.circle:hover {
+    transform: translateY(-6px) scale(1.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35),
+                0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.circle:active {
+    transform: translateY(-3px) scale(1.08);
+}
+
+.whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+}
+
+.instagram {
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.facebook {
+    background: linear-gradient(135deg, #1877F2 0%, #0d5dbf 100%);
+}
+
+/* ===================================
+   Animations
+   =================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   Responsive Design - Mobile
+   =================================== */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    .display-area {
+        font-size: 1.8rem;
+        padding: 18px 15px;
+        min-height: 90px;
+    }
+    
+    .history {
+        font-size: 0.8rem;
+    }
+
+    button {
+        padding: 16px 8px;
+        font-size: 1rem;
+    }
+    
+    .buttons {
+        gap: 8px;
+        padding: 14px;
+    }
+
+    .equal {
+        font-size: 1.3rem;
+    }
+
+    .footer {
+        padding: 14px;
+        gap: 15px;
+    }
+
+    .circle {
+        width: 48px;
+        height: 48px;
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 360px) {
+    .display-area {
+        font-size: 1.6rem;
+        padding: 15px 12px;
+        min-height: 85px;
+    }
+
+    button {
+        padding: 14px 6px;
+        font-size: 0.95rem;
+    }
+
+    .buttons {
+        gap: 7px;
+        padding: 12px;
+    }
+
+    .circle {
+        width: 44px;
+        height: 44px;
+        font-size: 19px;
+    }
+}
+
+/* ===================================
+   Responsive Design - Tablet & Desktop
+   =================================== */
+@media (min-width: 768px) {
+    .container {
+        max-width: 380px;
+    }
+
+    .display-area {
+        font-size: 2.3rem;
+        padding: 24px 22px;
+        min-height: 115px;
+    }
+
+    button {
+        padding: 20px 12px;
+        font-size: 1.2rem;
+    }
+
+    .buttons {
+        gap: 12px;
+        padding: 18px;
+    }
+
+    .circle {
+        width: 56px;
+        height: 56px;
+        font-size: 25px;
+    }
+}
+
+/* ===================================
+   Landscape Orientation
+   =================================== */
+@media (orientation: landscape) and (max-height: 600px) {
+    body {
+        padding: 10px;
+        justify-content: flex-start;
+    }
+
+    .display-area {
+        min-height: 75px;
+        padding: 14px;
+        font-size: 1.6rem;
+    }
+
+    button {
+        padding: 12px 8px;
+        font-size: 1rem;
+    }
+
+    .buttons {
+        gap: 7px;
+        padding: 12px;
+    }
+}
